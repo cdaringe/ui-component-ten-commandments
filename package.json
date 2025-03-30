@@ -3,23 +3,87 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
+    "dev": "wireit",
+    "build": "wireit",
+    "build:uno": "wireit",
+    "format": "prettier --write 'src/**/*.{ts,tsx,mdx}'",
     "start": "next start",
     "lint": "next lint"
   },
+  "wireit": {
+    "build": {
+      "dependencies": [
+        "build:uno",
+        "build:next"
+      ]
+    },
+    "dev": {
+      "dependencies": [
+        "dev:next",
+        "dev:uno"
+      ]
+    },
+    "dev:next": {
+      "command": "TURBOPACK=1 next dev",
+      "files": [
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.css",
+        "**/*.html"
+      ],
+      "service": true
+    },
+    "dev:uno": {
+      "command": "unocss --watch mdx-components.tsx 'src/**/*.{mdx,ts,tsx}' -o src/app/uno.css",
+      "files": [
+        "**/*.mdx",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.css",
+        "**/*.html"
+      ],
+      "service": true
+    },
+    "build:uno": {
+      "command": "unocss mdx-components.tsx 'src/**/*.{mdx,ts,tsx}' -o src/app/uno.css",
+      "files": [
+        "**/*.mdx",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.css",
+        "**/*.html"
+      ]
+    },
+    "build:next": {
+      "command": "next build",
+      "files": [
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.css",
+        "**/*.html"
+      ]
+    }
+  },
   "dependencies": {
+    "next": "15.2.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.2.3"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@mdx-js/loader": "3.1.0",
+    "@mdx-js/react": "3.1.0",
+    "@next/mdx": "15.2.3",
+    "@types/mdx": "2.0.13",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@unocss/cli": "66.1.0-beta.6",
     "eslint": "^9",
     "eslint-config-next": "15.2.3",
-    "@eslint/eslintrc": "^3"
+    "prettier": "3.5.3",
+    "typescript": "^5",
+    "unocss": "66.1.0-beta.6",
+    "wireit": "0.14.11"
   }
 }
