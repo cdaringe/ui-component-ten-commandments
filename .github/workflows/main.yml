@@ -7,6 +7,15 @@ on:
     branches:
       - main
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build:
     env:
@@ -37,6 +46,10 @@ jobs:
           echo "adding .nojekyll"
           touch ./out/.nojekyll || echo wuuuut
           ls -al out/.nojekyll || echo hmmmmmm
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
 
   # Deploy job
   deploy:
