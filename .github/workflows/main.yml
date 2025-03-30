@@ -18,8 +18,8 @@ permissions:
 
 jobs:
   build:
-    env:
-      NEXT_PUBLIC_BASE_PATH: /web-component-ten-commandments
+    # env:
+    #   NEXT_PUBLIC_BASE_PATH: /web-component-ten-commandments
     runs-on: ubuntu-latest
     steps:
       # https://github.com/JamesIves/github-pages-deploy-action#getting-started-airplane
@@ -36,11 +36,14 @@ jobs:
           # You may remove this line if you want to manage the configuration yourself.
           static_site_generator: next
       - name: Install pnpm
-        run: npm install -g pnpm@9.4.0
-      - uses: actions/setup-node@v3
+        uses: pnpm/action-setup@v4
         with:
-          node-version: 20.18.0
-          cache: "pnpm"
+          version: 10
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
       - name: Restore cache
         uses: actions/cache@v4
         with:
