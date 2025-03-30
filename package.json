@@ -8,7 +8,8 @@
     "build:uno": "wireit",
     "format": "prettier --write 'src/**/*.{ts,tsx,mdx}'",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "echo \"No tests specified\" && exit 0"
   },
   "wireit": {
     "build": {

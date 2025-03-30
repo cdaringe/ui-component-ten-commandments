@@ -7,6 +7,7 @@ import { init } from "@/util/hljs";
 
 const cherrySwash = Cherry_Swash({
   weight: "400",
+  subsets: ["latin"],
 });
 
 export const viewport: Viewport = {
@@ -17,7 +18,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "Web Component Design Ten Commandments",
-  description: "Heed them. Flourish.",
+  description: "Heed them. Build. Flourish.",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
