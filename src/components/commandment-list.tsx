@@ -70,6 +70,8 @@ export const CommandmentList = () => {
             {index + 1}. {commandment.title}
           </CommandmentHeader>
           {commandment.render({})}
+
+          <hr />
         </li>
       ))}
     </ul>
