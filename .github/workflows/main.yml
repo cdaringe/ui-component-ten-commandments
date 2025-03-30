@@ -18,8 +18,8 @@ permissions:
 
 jobs:
   build:
-    # env:
-    #   NEXT_PUBLIC_BASE_PATH: /web-component-ten-commandments
+    env:
+      NEXT_PUBLIC_BASE_PATH: /ui-component-ten-commandments
     runs-on: ubuntu-latest
     steps:
       - name: checkout 🛎️

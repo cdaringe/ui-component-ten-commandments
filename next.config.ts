@@ -2,8 +2,8 @@ import createMDX from "@next/mdx";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // basePath:
-  //   process.env.NEXT_PUBLIC_BASE_PATH || "",
+  basePath:
+    process.env.NEXT_PUBLIC_BASE_PATH || "",
   pageExtensions: ["ts", "tsx", "mdx"],
   experimental: {
     mdxRs: true,
