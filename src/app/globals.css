@@ -1,11 +1,31 @@
 /* https://cdnjs.com/libraries/highlight.js */
-@import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/base16/one-light.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/monokai.min.css");
+/* @import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-light.min.css"); */
+/* @import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css"); */
+/* @import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/base16/one-light.min.css"); */
 /* @import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/base16/snazzy.min.css"); */
 /* @import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css"); */
 html {
   font-family: monospace;
 }
 
-/* code {
-  max-height: 300px;
-} */
+code {
+  font-size: 1.25rem; /* Adjust the font size for code */
+  border-radius: 0.5rem; /* Rounded corners for the code block */
+}
+
+details[open] {
+  /* solarized light */
+  /* background-color: #fdf6e3; */
+  background-color: #e3e6fd;
+  padding: 1rem;
+  border-radius: 0.5rem; /* Rounded corners for the code block */
+}
+
+summary {
+  cursor: pointer;
+  outline: none; /* Remove outline for a cleaner look */
+}
+summary:hover {
+  text-decoration: underline; /* Optional: add a hover effect */
+}

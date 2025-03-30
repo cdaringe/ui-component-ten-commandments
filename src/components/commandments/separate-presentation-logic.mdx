@@ -1,0 +1,67 @@
+**Principle**: Separation of concerns
+
+```tsx
+// Presentational concerns
+const UserCard = ({
+  name,
+  bio,
+  ...rest
+}: User & DivAttrs) => (
+  <div {...rest}>
+    <h1>{name}</h1>
+    <p>{bio}</p>
+  </div>
+);
+
+// Logic concerns
+const UserCardContainer = ({
+  userId,
+  ...rest
+}) => {
+  const [userData, setUserData] =
+    React.useState<User | null>(null);
+  const { data, loading, error } =
+    useQuery(getUser);
+  if (loading)
+    return <div {...rest}>Loading...</div>;
+  if (error)
+    return <ErrorCard {...rest} error={error} />;
+  return <UserCard {...data} {...rest} />;
+};
+```
+
+<Wisdom>
+In our UserCardContainer, the bulk of the code is focused on
+getting data and handling interstitial states. Once a state is
+known, we pass the state into a presentational layer to take over
+the rest.
+
+The benefits of this are numerous:
+
+1. **Maintainability**: Logic and presentation can be maintained separately. If you need to change the logic for fetching user data, you can do so without affecting the presentation layer.
+2. **Reusability**: The presentational component can be reused in other parts of the application without the logic layer, allowing for greater flexibility in how the component is used.
+3. **Testability**: By separating concerns, you can write unit tests for both the logic and presentation layers independently. This makes it easier to ensure that each part of the component is working correctly.
+4. **Comprehension**: Separating concerns makes it easier for developers to understand the purpose of each part of the component. The logic layer handles data fetching and state management, while the presentation layer focuses on rendering the UI.
+5. **Collaboration**: In a team environment, different developers can work on the logic and presentation layers simultaneously without stepping on each other's toes. This can lead to faster development cycles and more efficient teamwork.
+
+```tsx
+// ❌ Avoid: A monolithic component handling both fetching and rendering.
+const UserDashboard = () => {
+  const [userData, setUserData] =
+    React.useState(null);
+  React.useEffect(() => {
+    fetch("/api/user")
+      .then((res) => res.json())
+      .then((data) => setUserData(data));
+  }, []);
+  if (!userData) return <div>Loading...</div>;
+  return (
+    <div>
+      <h1>{userData.name}</h1>
+      <p>{userData.bio}</p>
+    </div>
+  );
+};
+```
+
+</Wisdom>

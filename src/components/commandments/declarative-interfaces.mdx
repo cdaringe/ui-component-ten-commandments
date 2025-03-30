@@ -1,0 +1,87 @@
+**Principle**: Principle of least astonishment, Declarative UI
+
+```tsx
+type Props = {
+  // `isOpen` declares the modal to be open or closed.
+  // clear semantics make the component intuitive and
+  // predictable.
+  isOpen: boolean;
+};
+const Modal: FC<Props> = ({
+  isOpen,
+  ...unhandled
+}) =>
+  isOpen ? <Overlay {...unhandled} /> : null;
+```
+
+<Wisdom>
+Writing declarative interfaces takes careful intention
+by the developer. Field names should represent clear descriptors of the data,
+or signal clear behavioral intent. This makes it easy for other developers to
+understand the purpose of each field and how it affects the component's behavior.
+
+```tsx
+// ❌ Bad example. Non-descriptive names and missing documentation lead to confusion.
+const Widget = ({
+  a,
+  b,
+}: {
+  a: string;
+  b: string;
+}) => (
+  <div>
+    <span>{a}</span>
+    <span>{b}</span>
+  </div>
+);
+```
+
+It can be tempting to accept data in whatever shape you currently have it,
+and design a component interface around that rather than design an interface
+that is tailored to the component's intrinsics. Learn to identify these scenarios
+and avoid hastily accepting data structures that do not align with the component's
+purpose.
+"Declarative interfaces" is analogous to data modeling, but with focus at the
+component boundary.
+
+```tsx
+// ❌ Bad example. Using foreign data model, vs component local data model.
+// Let's build a component that shows a product's prices, with a discount!
+type DiscountPriceProps = {
+  items: Item[]; // we accept all of the products,
+  index: number; // and which product index it is
+  // 🤔. Does a price viewer need knowledge of all of the items? Does it need
+  // to know about the index? Certainly not!
+};
+const DiscountPrice: FC<DiscountPriceProps> = ({
+  items,
+  index,
+  className,
+  ...unhandled
+}) => {
+  // The below logic handles cases that are not pertinent to drawing discounted
+  // prices--it is only relevant to handling one callsite's obscure data model.
+  // Data transformations should almost always be handled earlier in the call stack.
+  if (
+    !items ||
+    index < 0 ||
+    index >= items.length
+  )
+    return null;
+  const item = items[index];
+  return (
+    <div
+      className={clsx("price", className)}
+      {...unhandled}
+    >
+      {item.discountedPrice
+        ? item.discountedPrice
+        : item.price}
+    </div>
+  );
+};
+```
+
+</Wisdom>
+
+<hr />

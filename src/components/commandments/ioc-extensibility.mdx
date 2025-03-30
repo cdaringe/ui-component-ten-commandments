@@ -1,0 +1,70 @@
+**Principle**: Portability
+
+```tsx
+/// Setup - Consider component `Bar` which renders a `Foo`. The user may want
+// to modify or change how `Foo` is rendered, including updating or overriding
+// default props.
+
+// foo.tsx
+export const Foo = ({ foo, ...rest }) => (
+  <div {...rest}>{foo}</div>
+);
+
+// bar.tsx
+type Props = {
+  /**
+   * Inversion of Control (IoC) utilizes callbacks to render the
+   * Foo component. This is known as the render-props pattern in React.
+   */
+  foo?: ({
+    Component: Foo,
+    props: FooProps,
+  }) => JSX.Element;
+};
+const Bar: FC<Props> = ({
+  foo,
+  ...unhandled
+}) => {
+  const fooProps: FooProps = {
+    className: "bg-blue flex",
+    foo,
+  };
+  return (
+    <div {...unhandled}>
+      {foo({
+        Component: Foo,
+        props: fooProps,
+      }) ?? <Foo {...fooProps} />}
+    </div>
+  );
+};
+
+// Usage. Observe using
+// your-app.tsx
+<Bar
+  foo={({
+    Component,
+    props: { className, ...unhandled },
+  }) => (
+    <Component
+      id="my-foo"
+      className={`${className} my-classname`}
+      {...unhandled}
+      foo="Squashed foo!"
+    />
+  )}
+/>;
+```
+
+<Wisdom>
+
+Inversion of control (IoC), as administered via render props, is a powerful technique that allows a
+component to delegate the responsibility of rendering a part of its
+interface to its caller. This is particularly useful when you want to
+provide a high degree of flexibility and extensibility in your
+component's design. By allowing the caller to specify how a part of
+the component should be rendered, you enable them to customize the
+component's behavior and appearance without needing to modify the
+component itself.
+
+</Wisdom>

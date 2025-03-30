@@ -1,0 +1,33 @@
+**Principle**: Composable design
+
+```tsx
+const Card: FC<Props> = ({
+  content,
+  title,
+  ...unhandled
+}) => (
+  /**
+   * Our card has three primary sections: a heading, body content, and footer
+   * We can see semantic component names corresponding to the anatomical structure
+   */
+  <div {...unhandled}>
+    <Heading>{title}</Heading>
+    {content}
+    <Footer />
+  </div>
+);
+```
+
+<Wisdom>
+Assembling smaller components into larger components is a well
+established strategy to build robust and malleable components. The above example
+demonstrates the principle by isolating `Heading` and `Footer` from
+`Card` component. Building small components supports...
+
+1. reusability (`Heading` can be freely used elsewhere),
+2. maintainability (`Heading` & `Footer` can be developed in isolation),
+3. comprehension (`Heading` & `Footer` can be studied in isolation),
+4. testability (`Heading` & `Footer` can be tested in isolation, or swapped in `Card` during test if needed),
+5. and separation of concerns.
+
+</Wisdom>

@@ -1,0 +1,25 @@
+**Principle**: Extensibility by default
+
+```tsx
+type Props = {
+  foo: string;
+} & HTMLAttributes<HTMLDivElement>;
+
+const Widget: FC<Props> = ({
+  foo,
+  ...unhandled
+}) => <div {...unhandled}>{foo}</div>;
+```
+
+<Wisdom>
+Components shall by default extend their root child component. Any
+unhandled input (props, attributes, etc.) should be passed down to the
+underlying component or DOM element. This permits great extensibility and
+ensures that the component can be extended by the consumer
+without needing to modify the component itself.
+
+Does the caller need to pass an `id`? How about a click handler?
+Following this commandment, your component already supports your
+caller's needs.
+
+</Wisdom>

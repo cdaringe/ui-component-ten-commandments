@@ -1,0 +1,47 @@
+**Principle**: Type safety, correctness
+
+```tsx
+type Status = "loading" | "success" | "error";
+const StatusBanner = ({
+  status,
+}: {
+  status: Status; // vs. `status: string`
+}) => {
+  switch (status) {
+    case "loading":
+      return <div>Loading...</div>;
+    case "success":
+      return <div>Success!</div>;
+    case "error":
+      return <div>Error occurred!</div>;
+  }
+};
+```
+
+<Wisdom>
+Making impossible states unrepresentable is a powerful principle that
+helps to ensure that your components are always in a valid state. By using
+a typed language, you can define precision input types for your
+component, which helps prevent the possibility of invalid or unexpected states from being passed in.
+Most UI systems let you define typed inputs.
+
+```tsx
+// ❌ Bad example. Too wide of types, incorrectly modeling the domain.
+
+/// Scenario: Consider if a Widget requires a foo or a bar as input:
+type BadProps = {
+  foo?: string;
+  bar?: number;
+}
+
+// unhandled case could occur!
+const Foo = (props: BadProps) => props.foo || props.bar;
+
+// ✅ Improved
+type VariantFooProps = { kind: "foo", value: string };
+type VariantBarProps = { kind: "bar": value: number };
+type GoodProps = VariantFooProps | VariantBarProps; // Use union types to restrict inputs
+const Foo = (props: GoodProps) => props.kind === "foo" ? props.foo : props.bar;
+```
+
+</Wisdom>

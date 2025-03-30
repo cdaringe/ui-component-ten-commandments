@@ -2,6 +2,7 @@
   "editor.quickSuggestions": {
     "strings": "on"
   },
+  "editor.formatOnSave": true,
   "debug.javascript.terminalOptions": {
     "skipFiles": [
       // "<node_internals>/**"

@@ -1,0 +1,71 @@
+**Principle**: Encapsulation, Cohesion
+
+```tsx
+import preprocessClick from "./preprocessors/onclick";
+const Widget = ({
+  className,
+  criticalResource,
+  onClick: userOnClick,
+  ...unhandled
+}: {
+  criticalResource: Resource;
+  // ✂️ snip
+}) => (
+  <div
+    // scoped/local styles, or utility styles minimize conflicts.
+    className={clsx(
+      className,
+      "widget-container b-none w-full",
+    )}
+    // behaviors rely on local &/or passed resources. minimized coupling
+    // to global or context-like implicit state.
+    onClick={preprocessClick(
+      userOnClick,
+      criticalResource,
+    )}
+    {...unhandled}
+  />
+);
+```
+
+<Wisdom>
+In UI programming, encapsulation is key to building robust components. This
+means that a component should manage its own behavior and styles, rather than relying on external factors or global state. By encapsulating behavior and styles, you can ensure that your component is self-contained and can be reused in different contexts without unexpected side effects.
+Building strictly with this principle commonly ends up producing components
+that are functional (as in functional programming) in nature. Some developers
+observe that such components, in an application context, often fall victim
+to "prop drilling". There are a few strategies to mitigate this, including,
+but not limited to, using intra-app messaging, consolidating cross-cutting resources
+into a singular reference passed down, IoC for binding contextual behavior higher
+up in the tree, and more.
+
+This commandment reduces local complexity, while often incurring a minor addition
+of complexity up your component tree, so as to support transporting input/props
+down to your component. Leveraging other commandments help to minimize this
+cost.
+
+```tsx
+// ❌ Bad
+const Widget = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  // implicit coupling to non-guaranteed resource
+  const criticalResource = useContext(
+    CriticalResourceContext,
+  );
+  return (
+    <div
+      className="global-container"
+      onClick={() =>
+        userOnClick(criticalResource)
+      }
+    >
+      {children}
+    </div>
+  );
+};
+```
+
+</Wisdom>
