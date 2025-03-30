@@ -1,10 +1,7 @@
-/* https://cdnjs.com/libraries/highlight.js */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/monokai.min.css");
-/* @import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-light.min.css"); */
-/* @import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css"); */
-/* @import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/base16/one-light.min.css"); */
-/* @import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/base16/snazzy.min.css"); */
-/* @import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css"); */
+
+/* https://cdnjs.com/libraries/highlight.js */
+
 html {
   font-family: monospace;
 }
