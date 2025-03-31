@@ -76,7 +76,7 @@
     "@mdx-js/react": "3.1.0",
     "@next/mdx": "15.2.4",
     "@types/mdx": "2.0.13",
-    "@types/node": "^20",
+    "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@unocss/cli": "66.1.0-beta.6",
