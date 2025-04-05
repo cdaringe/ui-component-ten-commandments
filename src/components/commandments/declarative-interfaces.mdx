@@ -11,7 +11,9 @@ const Modal: FC<Props> = ({
   isOpen,
   ...unhandled
 }) =>
-  isOpen ? <Overlay {...unhandled} /> : null;
+  isOpen ? (
+    <Overlay {...unhandled} />
+  ) : null;
 ```
 
 <Wisdom>
@@ -53,7 +55,9 @@ type DiscountPriceProps = {
   // 🤔. Does a price viewer need knowledge of all of the items? Does it need
   // to know about the index? Certainly not!
 };
-const DiscountPrice: FC<DiscountPriceProps> = ({
+const DiscountPrice: FC<
+  DiscountPriceProps
+> = ({
   items,
   index,
   className,
@@ -71,7 +75,10 @@ const DiscountPrice: FC<DiscountPriceProps> = ({
   const item = items[index];
   return (
     <div
-      className={clsx("price", className)}
+      className={clsx(
+        "price",
+        className,
+      )}
       {...unhandled}
     >
       {item.discountedPrice

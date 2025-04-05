@@ -7,8 +7,15 @@ html {
 }
 
 code {
-  font-size: 1.25rem; /* Adjust the font size for code */
-  border-radius: 0.5rem; /* Rounded corners for the code block */
+  margin-left: -10px;
+  margin-right: -6px;
+}
+@media (min-width: 768px){
+  code {
+    /* font-size: 1.25rem; Adjust the font size for code */
+    margin: initial;
+    border-radius: 0.5rem; /* Rounded corners for the code block */
+  }
 }
 
 details[open] {

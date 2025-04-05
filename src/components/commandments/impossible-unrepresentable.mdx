@@ -1,7 +1,10 @@
 **Principle**: Type safety, correctness
 
 ```tsx
-type Status = "loading" | "success" | "error";
+type Status =
+  | "loading"
+  | "success"
+  | "error";
 const StatusBanner = ({
   status,
 }: {

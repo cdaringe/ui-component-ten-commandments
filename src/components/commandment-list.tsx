@@ -7,6 +7,7 @@ import CommandmentSeparatePresLog from "./commandments/separate-presentation-log
 import CommandmentEncapuslate from "./commandments/encapsulate.mdx";
 import CommandmentBlessedReferences from "./commandments/blessed-references.mdx";
 import CommandmentIOCExtensibility from "./commandments/ioc-extensibility.mdx";
+import React from "react";
 
 export const CommandmentList = () => {
   const commandments = [
@@ -23,16 +24,20 @@ export const CommandmentList = () => {
     {
       title:
         "Thou shall make impossible states unrepresentable",
-      render: CommandmentImpossibleStates,
+      render:
+        CommandmentImpossibleStates,
     },
     {
-      title: "Thou shalt forward unhandled input",
-      render: CommandmentForwardUnhandled,
+      title:
+        "Thou shalt forward unhandled input",
+      render:
+        CommandmentForwardUnhandled,
     },
     {
       title:
         "Thou shalt separate presentation from logic",
-      render: CommandmentSeparatePresLog,
+      render:
+        CommandmentSeparatePresLog,
     },
     {
       title:
@@ -52,28 +57,39 @@ export const CommandmentList = () => {
     {
       title:
         "Thou shalt only reference blessed resources",
-      render: CommandmentBlessedReferences,
+      render:
+        CommandmentBlessedReferences,
     },
     {
       title:
         "Thou shalt invert control for high extensibility cases",
-      render: CommandmentIOCExtensibility,
+      render:
+        CommandmentIOCExtensibility,
     },
   ];
 
+  const lastIndex =
+    commandments.length - 1;
   return (
     <ul className="p-0 list-none">
-      {commandments.map((commandment, index) => (
-        <li key={index}>
-          {/* Render the component if it exists, otherwise just use the title */}
-          <CommandmentHeader>
-            {index + 1}. {commandment.title}
-          </CommandmentHeader>
-          {commandment.render({})}
-
-          <hr />
-        </li>
-      ))}
+      {commandments.map(
+        (commandment, index) => (
+          <React.Fragment key={index}>
+            <li>
+              {/* Render the component if it exists, otherwise just use the title */}
+              <CommandmentHeader>
+                {index + 1}.{" "}
+                {commandment.title}
+              </CommandmentHeader>
+              {commandment.render({})}
+            </li>
+            {lastIndex ===
+            index ? null : (
+              <hr />
+            )}
+          </React.Fragment>
+        ),
+      )}
     </ul>
   );
 };

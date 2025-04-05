@@ -5,7 +5,8 @@ export const Wisdom: React.FC<{
 }> = ({ children }) => (
   <details>
     <summary>
-      Explain thy wisdom (click to expand)
+      Explain thy wisdom (click to
+      expand)
     </summary>
     <div className="wisdom-content">
       {children}

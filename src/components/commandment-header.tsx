@@ -4,7 +4,11 @@ export const CommandmentHeader: React.FC<
   {
     children: React.ReactNode;
   } & React.HTMLAttributes<HTMLHeadingElement>
-> = ({ children, className, ...unhandled }) => {
+> = ({
+  children,
+  className,
+  ...unhandled
+}) => {
   const id = String(children)
     .toLowerCase()
     .trim()

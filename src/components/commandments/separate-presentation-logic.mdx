@@ -23,10 +23,19 @@ const UserCardContainer = ({
   const { data, loading, error } =
     useQuery(getUser);
   if (loading)
-    return <div {...rest}>Loading...</div>;
+    return (
+      <div {...rest}>Loading...</div>
+    );
   if (error)
-    return <ErrorCard {...rest} error={error} />;
-  return <UserCard {...data} {...rest} />;
+    return (
+      <ErrorCard
+        {...rest}
+        error={error}
+      />
+    );
+  return (
+    <UserCard {...data} {...rest} />
+  );
 };
 ```
 
@@ -52,9 +61,12 @@ const UserDashboard = () => {
   React.useEffect(() => {
     fetch("/api/user")
       .then((res) => res.json())
-      .then((data) => setUserData(data));
+      .then((data) =>
+        setUserData(data),
+      );
   }, []);
-  if (!userData) return <div>Loading...</div>;
+  if (!userData)
+    return <div>Loading...</div>;
   return (
     <div>
       <h1>{userData.name}</h1>

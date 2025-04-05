@@ -6,9 +6,10 @@
 // default props.
 
 // foo.tsx
-export const Foo = ({ foo, ...rest }) => (
-  <div {...rest}>{foo}</div>
-);
+export const Foo = ({
+  foo,
+  ...rest
+}) => <div {...rest}>{foo}</div>;
 
 // bar.tsx
 type Props = {
