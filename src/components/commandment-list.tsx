@@ -13,7 +13,7 @@ export const CommandmentList = () => {
   const commandments = [
     {
       title:
-        "Thou shalt compose with anatomical components",
+        "Thou shalt build with anatomical components",
       render: CommandmentAnatomical,
     },
     {

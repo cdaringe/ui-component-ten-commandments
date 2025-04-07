@@ -1,11 +1,11 @@
 import React from "react";
 
-export const Wisdom: React.FC<{
+export const CounterExample: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => (
-  <details className="wisdom-content">
+  <details className="counter-example-content mb-2">
     <summary>
-      Explain thy wisdom (click to
+      See a counter example (click to
       expand)
     </summary>
     <div>{children}</div>

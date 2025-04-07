@@ -1,5 +1,6 @@
 import type { MDXComponents } from "mdx/types";
 import { Wisdom } from "./src/components/wisdom";
+import { CounterExample } from "./src/components/counter-example";
 import { CommandmentHeader } from "./src/components/commandment-header";
 import { CommandmentList } from "./src/components/commandment-list";
 
@@ -16,6 +17,7 @@ export function useMDXComponents(
     Wisdom,
     CommandmentHeader,
     CommandmentList,
+    CounterExample,
     ...components,
   };
 }

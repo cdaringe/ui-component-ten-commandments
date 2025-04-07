@@ -1,4 +1,8 @@
-**Principle**: Composable design
+> **Summary**: Components should be built from parts that semantically represent their
+> anatomical structure, and should also minimize inlining of markup which could
+> otherwise be represented by a logical boundary.
+
+> **Principles**: Composable design.
 
 ```tsx
 const Card: FC<Props> = ({
@@ -7,7 +11,7 @@ const Card: FC<Props> = ({
   ...unhandled
 }) => (
   /**
-   * Our card has three primary sections: a heading, body content, and footer
+   * Our card has three primary sections: a heading, body content, and footer.
    * We can see semantic component names corresponding to the anatomical structure
    */
   <div {...unhandled}>
@@ -17,6 +21,56 @@ const Card: FC<Props> = ({
   </div>
 );
 ```
+
+<CounterExample>
+There is nothing technically wrong with the following code, yet it violates our
+commandment. Specifically, we see the anatomy of our Card
+smashed together. Something like an item `Card` or contact `Card` is a bit of a
+mundane example, but something most web developers are familiar with.
+
+```tsx
+const Card: FC<Props> = ({
+  content,
+  title,
+  ...unhandled
+}) => (
+  <div {...unhandled}>
+    <h1 className="my-header p-2 font-bold uppercase">
+      {formatHeader(title)}
+    </h1>
+    <footer className="my-footer flex bottom-0 p-2 justify-between">
+      <div className="my-footer-links">
+        {footerLinks.map((link) => {
+          return (
+            <a
+              key={link.url}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {link.text}
+            </a>
+          );
+        })}
+      </div>
+      <img src={logo} alt="logo" />
+      <a
+        className="hover:cursor-pointer"
+        href="https://my.site.com/edit"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src={editIcon}
+          alt="edit"
+        />
+      </a>
+    </footer>
+  </div>
+);
+```
+
+</CounterExample>
 
 <Wisdom>
 Assembling smaller components into larger components is a well

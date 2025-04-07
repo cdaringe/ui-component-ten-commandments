@@ -6,12 +6,12 @@ html {
   font-family: monospace;
 }
 
-code {
+pre code {
   margin-left: -10px;
   margin-right: -6px;
 }
 @media (min-width: 768px){
-  code {
+  pre code {
     /* font-size: 1.25rem; Adjust the font size for code */
     margin: initial;
     border-radius: 0.5rem; /* Rounded corners for the code block */
@@ -21,7 +21,6 @@ code {
 details[open] {
   /* solarized light */
   /* background-color: #fdf6e3; */
-  background-color: #e3e6fd;
   padding: 1rem;
   border-radius: 0.5rem; /* Rounded corners for the code block */
 }
@@ -32,4 +31,12 @@ summary {
 }
 summary:hover {
   text-decoration: underline; /* Optional: add a hover effect */
+}
+
+details[open].counter-example-content {
+  background-color: #e39494;
+}
+
+details[open].wisdom-content {
+  background-color: #e3e6fd;
 }
