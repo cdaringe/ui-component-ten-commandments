@@ -1,0 +1,70 @@
+import githubIcon from "./github-mark.png";
+
+export const content = `Lorem ipsum dolor sit amet,
+    consectetur adipiscing elit. Sed
+    tincidunt vitae metus id accumsan.
+    In leo urna, rhoncus nec porttitor
+    sit amet, auctor vel orci. Vivamus
+    molestie, tellus vitae finibus
+    iaculis, nisl ligula posuere elit,
+    eu consectetur lectus dui eu enim.
+    Donec tristique nibh risus, lobortis
+    ultricies quam consectetur at. Fusce
+    suscipit est nulla, non sodales
+    lectus aliquam vel. Curabitur
+    faucibus, ipsum sit amet efficitur
+    ornare, tellus mauris tempus urna,
+    eget sollicitudin lectus risus a
+    massa. Pellentesque sed consectetur
+    enim. Sed consectetur justo sed
+    hendrerit facilisis.`;
+
+<div className="w-[400px] border-2 border-solid border-gray-200 rounded-lg shadow-lg m-4">
+  <h1
+    className="p-4 font-bold m-0 underline underline-blue"
+    children="UI Component Anatomy"
+  />
+  <p
+    className="px-4 text-justify mt-0 mb-4"
+    children={content}
+  />
+  <footer className="bg-blue bottom-0 flex justify-between items-center rounded-b-lg">
+    <ul className="flex list-none px-4">
+      {[
+        {
+          url: "https://foo.bar",
+          text: "Link Text",
+        },
+        {
+          url: "https://another.link",
+          text: "Another Link",
+        },
+      ].map((link) => {
+        return (
+          <li className="mr-4">
+            <a
+              key={link.url}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {link.text}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+    <a
+      className="hover:cursor-pointer"
+      href="https://my.site.com/edit"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img
+        className="w-6 p-4"
+        alt="edit on github"
+        src={githubIcon.src}
+      />
+    </a>
+  </footer>
+</div>

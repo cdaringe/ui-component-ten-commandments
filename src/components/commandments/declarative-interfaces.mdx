@@ -16,29 +16,26 @@ const Modal: FC<Props> = ({
   ) : null;
 ```
 
-<Wisdom>
-Writing declarative interfaces takes careful intention
-by the developer. Field names should represent clear descriptors of the data,
-or signal clear behavioral intent. This makes it easy for other developers to
-understand the purpose of each field and how it affects the component's behavior.
-
+<CounterExample>
+Examples of non-declarative interfaces are abundant. They could use non-descriptive names and be missing documentation, like the following,
 ```tsx
-// ❌ Bad example. Non-descriptive names and missing documentation lead to confusion.
 const Widget = ({
-  a,
-  b,
+  item,
+  data,
 }: {
-  a: string;
-  b: string;
+  item: string;
+  data: any;
 }) => (
-  <div>
-    <span>{a}</span>
-    <span>{b}</span>
-  </div>
+  <>
+    <span>{item}</span>
+    <span>{data}</span>
+  </>
 );
 ```
 
-It can be tempting to accept data in whatever shape you currently have it,
+but more often, bad interfaces come about by quickly building on the fly
+with shallow consideration for the UI itself, and letting the present data
+define the interface. It can be tempting to accept data in whatever shape you currently have it,
 and design a component interface around that rather than design an interface
 that is tailored to the component's intrinsics. Learn to identify these scenarios
 and avoid hastily accepting data structures that do not align with the component's
@@ -70,8 +67,9 @@ const DiscountPrice: FC<
     !items ||
     index < 0 ||
     index >= items.length
-  )
+  ) {
     return null;
+  }
   const item = items[index];
   return (
     <div
@@ -88,5 +86,28 @@ const DiscountPrice: FC<
   );
 };
 ```
+
+A better design, relative to the prior, would be akin to the following:
+
+```tsx
+type DiscountPriceProps = Pick<
+  currentPrice: { scalar: number; uom: CurrencyCode },
+  previousPrice: { scalar: number; uom: CurrencyCode },
+>;
+const DiscountPrice: FC<
+  DiscountPriceProps
+> = (props) => <snip-snip-snip />;
+```
+
+The declarative interface is clear and concise, focusing on the component's
+intrinsic data model rather than the external data model. This makes it easier
+to understand the component's purpose and how it should be used.
+
+</CounterExample>
+<Wisdom>
+Writing declarative interfaces takes careful intention
+by the developer. Field names should represent clear descriptors of the data,
+or signal clear behavioral intent. This makes it easy for other developers to
+understand the purpose of each field and how it affects the component's behavior.
 
 </Wisdom>

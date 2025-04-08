@@ -1,6 +1,9 @@
-> **Summary**: Components should be built from parts that semantically represent their
-> anatomical structure, and should also minimize inlining of markup which could
-> otherwise be represented by a logical boundary.
+import inputImg from "../../img/anatomy-input.png";
+import outputImg from "../../img/anatomy-output.png";
+
+> **Summary**: Components should be built from parts that semantically represent
+> their anatomical structure, and should also minimize inlining of markup which
+> could be represented by a logical boundary.
 
 > **Principles**: Composable design.
 
@@ -23,10 +26,11 @@ const Card: FC<Props> = ({
 ```
 
 <CounterExample>
-There is nothing technically wrong with the following code, yet it violates our
-commandment. Specifically, we see the anatomy of our Card
-smashed together. Something like an item `Card` or contact `Card` is a bit of a
-mundane example, but something most web developers are familiar with.
+Below we can observe the anatomy of our Card smashed together. There is no boundary
+between the `Heading` and `Footer`, because _there is none_--it is all just `Card`.
+The structure lacks distinct parts, leading to potential confusion.
+Although a `Card` is a bit of a
+mundane example, it's a component many web developers are familiar with.
 
 ```tsx
 const Card: FC<Props> = ({
@@ -83,5 +87,23 @@ demonstrates the principle by isolating `Heading` and `Footer` from
 3. comprehension (`Heading` & `Footer` can be studied in isolation),
 4. testability (`Heading` & `Footer` can be tested in isolation, or swapped in `Card` during test if needed),
 5. and separation of concerns.
+
+When you are sent an image, design file, or visual spec like this:
+
+<img
+  src={inputImg.src}
+  alt="anatomy input"
+  className="w-full md:w-[400px] mb-4"
+/>
+
+you should see the anatomy like this:
+
+<img
+  src={outputImg.src}
+  alt="anatomy output"
+  className="w-full md:w-[400px] mb-4"
+/>
+
+then build _those_ components accordingly.
 
 </Wisdom>
