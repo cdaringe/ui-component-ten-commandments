@@ -1,4 +1,6 @@
-**Principle**: Extensibility by default
+> **Summary**: Components shall extend their root child component and pass unhandled props. This makes components feel like a natural extension of the target UI runtime.
+
+> **Principles**: Extensibility by default.
 
 ```tsx
 type Props = {
@@ -10,6 +12,34 @@ const Widget: FC<Props> = ({
   ...unhandled
 }) => <div {...unhandled}>{foo}</div>;
 ```
+
+<CounterExample>
+```tsx
+const Form: FC<{ fields: FormField[] }> = () => (
+  <form>
+    {fields.map((field) => <FormField key={field.id} {...field} />)}
+  </form>
+);
+```
+
+What would a consumer possibly want to do with a form control? Perhaps:
+
+1. Add an `onSubmit` handler?
+2. Add an `id` or `className`?
+3. Add a `data-*` attribute?
+4. Add more children?
+
+The takeaway is that there are _many_ reasons to want to extend the `form`, even
+if the component needs only light extension. Testing alone often warrants this
+addition to components.
+
+Sadly, this commandment is challenging
+to achieve in some of the interesting,
+nominally typed UI languages out
+theres, such as `Elm` or `ReScript`,
+at least without using a preprocessor.
+
+</CounterExample>
 
 <Wisdom>
 Components shall by default extend their root child component. Any

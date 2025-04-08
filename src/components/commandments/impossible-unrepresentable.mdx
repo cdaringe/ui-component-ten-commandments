@@ -1,4 +1,9 @@
-**Principle**: Type safety, correctness
+> **Summary**: Design interfaces that only represent valid input and valid states,
+> mitigating errors resulting from incomplete design or unexpected input.
+
+> **Principles**: Type safety, correctness
+
+A classic example of this principle is using narrow types--such as discriminated unions--versus open types.
 
 ```tsx
 type Status =
@@ -8,7 +13,7 @@ type Status =
 const StatusBanner = ({
   status,
 }: {
-  status: Status; // vs. `status: string`
+  status: Status; // versus, e.g. `status: string`
 }) => {
   switch (status) {
     case "loading":
@@ -17,9 +22,30 @@ const StatusBanner = ({
       return <div>Success!</div>;
     case "error":
       return <div>Error occurred!</div>;
+    default:
+      // status is type `never`!
+      throw new Error(
+        `unknown status: ${status}`,
+      );
   }
 };
 ```
+
+<CounterExample>
+```tsx
+// ❌ Error case is unhandled, but everything will compile just fine!
+const StatusBanner = ({
+  status,
+}: {
+  status: string;
+}) => {
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+  return <div>Success!</div>;
+};
+```
+</CounterExample>
 
 <Wisdom>
 Making impossible states unrepresentable is a powerful principle that

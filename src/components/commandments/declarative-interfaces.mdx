@@ -1,4 +1,7 @@
-**Principle**: Principle of least astonishment, Declarative UI
+> **Summary**: Components should have intuitive, self-describing interfaces that
+> reflect their purpose and behavior.
+
+> **Principles**: Principle of least astonishment, Declarative UI
 
 ```tsx
 type Props = {
@@ -79,9 +82,7 @@ const DiscountPrice: FC<
       )}
       {...unhandled}
     >
-      {item.discountedPrice
-        ? item.discountedPrice
-        : item.price}
+      <snip-snip-snip />
     </div>
   );
 };
